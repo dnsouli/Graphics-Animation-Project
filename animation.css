@@ -14,20 +14,3 @@
 .checkpoint.checkpoint-selected {
   background-color: red;
 }
-
-
-
-/*
-var checkpointIndex = 0;
-
-function selectCheckpoint(index) {
-  // change how checkpoint circles get drawn
-  checkpointIndex = index;
-
-  // deselect previously selected checkpointIndex
-
-  // add a class so that selected checkpoint gets drawn differently
-  var selected = document.getElementById(`checkpoint-${index}`);
-  selected.className = "checkpoint checkpoint-selected";
-}
-*/

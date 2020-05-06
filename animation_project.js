@@ -89,6 +89,8 @@ var thetaCheck2 = [0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0];
 var thetaCheck3 = [0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0];
 var checkpointThetaList = [thetaCheck1, thetaCheck2, thetaCheck3];
 
+var animationRunnerStatus = false;
+
 //-------------------------------------------
 
 function scale4(a, b, c) {
@@ -335,6 +337,11 @@ function selectCheckpoint(index) {
   // add a class so that selected checkpoint gets drawn differently
   var selected = document.getElementById(`checkpoint-${index}`);
   selected.className = "checkpoint checkpoint-selected";
+
+  theta = checkpointThetaList[index];
+  for (var i = 0; i < numAngles; i++) {
+    initNodes(i);
+  }
 }
 
 window.onload = function init() {
@@ -411,6 +418,14 @@ window.onload = function init() {
       selectCheckpoint(2);
     }
 
+    document.getElementById("animationRunner").onchange = function(event) {
+      animationRunnerStatus = !animationRunnerStatus;
+      var checkIndex = 0;
+      var startTime = Date.now();
+      var startTheta = checkpointThetaList[0];
+      console.log(animationRunnerStatus);
+    }
+
     // roborot position controls
         document.getElementById("slider0").oninput = function(event) {
         theta[torsoId ] = event.target.value;
@@ -476,10 +491,61 @@ window.onload = function init() {
     render();
 }
 
+// t varies between 0 and 1
+// return a value linearly interpolated between a and b
+// if t == 0, return a
+// if t == 1, return b
+function interpolate(a, b, t) {
+  return (1 - t) * a + t * b;
+}
+
+// arrA = [0, .5, 0]
+// arrB = [1, 1.5, 1]
+// interpolateArray(arrA, arrB, .5) = [.5, .75, .5]
+// 0 <= t <= 1
+function interpolateArray(arrA, arrB, t) {
+  var arrC = [];
+  for (var i = 0; i < arrA.length; i++) {
+    arrC.push(interpolate(arrA[i], arrB[i], t));
+  }
+  return arrC;
+}
+
+
+
+var checkIndex = 0;
+var startTime = Date.now();
+var startTheta = checkpointThetaList[0];
+var endTheta;
+var elapsedTime;
+var currentTheta;
 
 var render = function() {
-
         gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         traverse(torsoId);
+
+        // keep track of which checkpoint,
+        // how much time is spent etc and do interpolation
+        if(animationRunnerStatus){
+          startTheta = checkpointThetaList[checkIndex];
+          var endIndex = (checkIndex + 1) % 3;
+          endTheta = checkpointThetaList[endIndex];
+
+          elapsedTime = Date.now() - startTime;
+          if(elapsedTime > 2000){
+
+            startTime = Date.now();
+            checkIndex = (checkIndex + 1) % 3;
+            console.log(checkIndex);
+          }
+
+          currentTheta = interpolateArray(startTheta, endTheta, elapsedTime / 2000);
+
+          theta = currentTheta;
+          for (var i = 0; i < numAngles; i++) {
+            initNodes(i);
+          }
+        }
+
         requestAnimFrame(render);
 }
