@@ -1,0 +1,33 @@
+#checkpoint-container {
+  background-color: grey;
+  width:80px;
+}
+
+.checkpoint {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: white;
+}
+
+.checkpoint.checkpoint-selected {
+  background-color: red;
+}
+
+
+
+/*
+var checkpointIndex = 0;
+
+function selectCheckpoint(index) {
+  // change how checkpoint circles get drawn
+  checkpointIndex = index;
+
+  // deselect previously selected checkpointIndex
+
+  // add a class so that selected checkpoint gets drawn differently
+  var selected = document.getElementById(`checkpoint-${index}`);
+  selected.className = "checkpoint checkpoint-selected";
+}
+*/

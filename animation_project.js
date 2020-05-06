@@ -84,6 +84,11 @@ var modelViewLoc;
 
 var pointsArray = [];
 
+var thetaCheck1 = [0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0];
+var thetaCheck2 = [0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0];
+var thetaCheck3 = [0, 0, 0, 0, 0, 0, 180, 0, 180, 0, 0];
+var checkpointThetaList = [thetaCheck1, thetaCheck2, thetaCheck3];
+
 //-------------------------------------------
 
 function scale4(a, b, c) {
@@ -316,6 +321,21 @@ function cube()
     quad( 5, 4, 0, 1 );
 }
 
+var checkpointIndex = 0;
+function selectCheckpoint(index) {
+  // change how checkpoint circles get drawn
+  checkpointIndex = index;
+
+  // deselect previously selected checkpointIndex
+  var previouslySelected = document.getElementsByClassName("checkpoint-selected");
+  for(var i = 0; i < previouslySelected.length; i++) {
+    previouslySelected[i].className = "checkpoint";
+  }
+
+  // add a class so that selected checkpoint gets drawn differently
+  var selected = document.getElementById(`checkpoint-${index}`);
+  selected.className = "checkpoint checkpoint-selected";
+}
 
 window.onload = function init() {
 
@@ -380,51 +400,75 @@ window.onload = function init() {
        flatten(lightPosition) );
     gl.uniform1f(gl.getUniformLocation(program, "shininess"),materialShininess);
 
+    // checkpoint controls
+    document.getElementById("checkpoint-0").onclick = function(event) {
+      selectCheckpoint(0);
+    }
+    document.getElementById("checkpoint-1").onclick = function(event) {
+      selectCheckpoint(1);
+    }
+    document.getElementById("checkpoint-2").onclick = function(event) {
+      selectCheckpoint(2);
+    }
+
+    // roborot position controls
         document.getElementById("slider0").oninput = function(event) {
         theta[torsoId ] = event.target.value;
         initNodes(torsoId);
+        checkpointThetaList[checkpointIndex][torsoId ] = event.target.value;
+
     };
         document.getElementById("slider1").oninput = function(event) {
         theta[head1Id] = event.target.value;
         initNodes(head1Id);
+        checkpointThetaList[checkpointIndex][head1Id ] = event.target.value;
     };
 
     document.getElementById("slider2").oninput = function(event) {
          theta[leftUpperArmId] = event.target.value;
          initNodes(leftUpperArmId);
+         checkpointThetaList[checkpointIndex][leftUpperArmId ] = event.target.value;
     };
     document.getElementById("slider3").oninput = function(event) {
          theta[leftLowerArmId] =  event.target.value;
          initNodes(leftLowerArmId);
+         checkpointThetaList[checkpointIndex][leftLowerArmId ] = event.target.value;
     };
 
         document.getElementById("slider4").oninput = function(event) {
         theta[rightUpperArmId] = event.target.value;
         initNodes(rightUpperArmId);
+        checkpointThetaList[checkpointIndex][rightUpperArmId ] = event.target.value;
     };
     document.getElementById("slider5").oninput = function(event) {
          theta[rightLowerArmId] =  event.target.value;
          initNodes(rightLowerArmId);
+         checkpointThetaList[checkpointIndex][rightLowerArmId ] = event.target.value;
     };
         document.getElementById("slider6").oninput = function(event) {
         theta[leftUpperLegId] = event.target.value;
         initNodes(leftUpperLegId);
+        checkpointThetaList[checkpointIndex][leftUpperLegId ] = event.target.value;
     };
     document.getElementById("slider7").oninput = function(event) {
          theta[leftLowerLegId] = event.target.value;
          initNodes(leftLowerLegId);
+         checkpointThetaList[checkpointIndex][leftLowerLegId ] = event.target.value;
     };
     document.getElementById("slider8").oninput = function(event) {
          theta[rightUpperLegId] =  event.target.value;
          initNodes(rightUpperLegId);
+         checkpointThetaList[checkpointIndex][rightUpperLegId ] = event.target.value;
     };
         document.getElementById("slider9").oninput = function(event) {
         theta[rightLowerLegId] = event.target.value;
         initNodes(rightLowerLegId);
+        checkpointThetaList[checkpointIndex][rightLowerLegId ] = event.target.value;
     };
     document.getElementById("slider10").oninput = function(event) {
          theta[head2Id] = event.target.value;
          initNodes(head2Id);
+         checkpointThetaList[checkpointIndex][head2Id ] = event.target.value;
     };
 
     for(i=0; i<numNodes; i++) initNodes(i);
