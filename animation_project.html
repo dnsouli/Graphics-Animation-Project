@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="./animation.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
 <script id="vertex-shader" type="x-shader/x-vertex">
@@ -78,88 +79,98 @@ void main()
 
 <body>
 
+<div id="slider-div">
   <div>
-  torso angle -180 <input id="slider0" type="range"
-   min="-180" max="180" step="10" value="0"
-    />
-   180
-  </div><br/>
-  <div>
-  head2 angle -180 <input id="slider10" type="range"
+  torso angle: -180 <input id="slider0" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
 
   <div>
-  head1 angle -180 <input id="slider1" type="range"
+  head2 angle: -180 <input id="slider10" type="range"
+   min="-180" max="180" step="10" value="0"
+    />
+   180
+  </div><br/>
+
+  <div>
+  head1 angle: -180 <input id="slider1" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
 
   <div id="slider2">
-  left upper arm angle -180 <input id="slider2" type="range"
+  left upper arm angle: -180 <input id="slider2" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
   <div>
-  left lower arm angle -180 <input id="slider3" type="range"
+  left lower arm angle: -180 <input id="slider3" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
   <div>
-  right upper arm angle -180 <input id="slider4" type="range"
+  right upper arm angle: -180 <input id="slider4" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
   <div>
-  right lower arm angle -180 <input id="slider5" type="range"
-   min="-180" max="180" step="10" value="0"
-    />
-   180
-  </div><br/>
-  <div>
-  left upper leg angle -180 <input id="slider6" type="range"
-   min="-180" max="180" step="10" value="0"
-    />
-   180
-  </div><br/>
-  <div>
-  left lower leg angle -180 <input id="slider7" type="range"
-   min="-180" max="180" step="10" value="0"
-    />
-   180
-  </div><br/>
-  <div>
-  right upper leg angle -180 <input id="slider8" type="range"
+  right lower arm angle: -180 <input id="slider5" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
 
   <div>
-  right lower leg angle -180 <input id="slider9" type="range"
+  left upper leg angle: -180 <input id="slider6" type="range"
+   min="-180" max="180" step="10" value="0"
+    />
+   180
+  </div><br/>
+  <div>
+  left lower leg angle: -180 <input id="slider7" type="range"
+   min="-180" max="180" step="10" value="0"
+    />
+   180
+  </div><br/>
+  <div>
+  right upper leg angle: -180 <input id="slider8" type="range"
    min="-180" max="180" step="10" value="0"
     />
    180
   </div><br/>
 
-<label for="checkpoint-container"> Checkpoint Buttons (1-3) </label>
-<div id="checkpoint-container">
-  <div id="checkpoint-0" class="checkpoint checkpoint-selected"></div>
-  <div id="checkpoint-1" class="checkpoint"></div>
-  <div id="checkpoint-2" class="checkpoint"></div>
+  <div>
+  right lower leg angle: -180 <input id="slider9" type="range"
+   min="-180" max="180" step="10" value="0"
+    />
+   180
+  </div><br/>
 </div>
 
-<label for="animationRunner"> Run Your Animation </label>
-<input type="checkbox" id="animationRunner" />
+<div id="checkpoint-div">
+<label for="checkpoint-container"> Checkpoint Buttons (1-3) </label>
+  <div id="checkpoint-container">
+    <div id="checkpoint-0" class="checkpoint checkpoint-selected"></div>
+    <div id="checkpoint-1" class="checkpoint"></div>
+    <div id="checkpoint-2" class="checkpoint"></div>
+  </div>
+  <label for="animationRunner"> Run Your Animation </label>
+  <input type="checkbox" id="animationRunner" />
+</div>
 
+
+
+<div id="canvas-div">
 <canvas id="gl-canvas" width="512"" height="512">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
+</div>
+
 </body>
 </html>
